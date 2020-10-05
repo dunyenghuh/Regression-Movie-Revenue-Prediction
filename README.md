@@ -14,3 +14,6 @@ log transformming the target variabkle
 
 2) Modeling:
 LGB, Cat, XGB
+
+Data:
+https://www.kaggle.com/c/tmdb-box-office-prediction/data
