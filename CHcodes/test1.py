@@ -25,8 +25,12 @@ train0.runtime.describe()
 print(train0['status'].value_counts())
 train1 = train0[train0['status'] != 'Rumored']
 
+# missing rows
+print(train1.isna().sum())
+
 # remove unnecessary cols
-remove = ['id', 'imdb_id', 'homepage', 'poster_path', 'spoken_languages', 'original_title', 'status']
+remove = ['id', 'imdb_id', 'homepage', 'poster_path', 'spoken_languages', 'original_title', 'status',
+          'belongs_to_collection', 'tagline', 'Keywords']
 train1 = train1.drop(columns=remove)
 
 # get date in the right format
