@@ -3,6 +3,7 @@ import numpy as np
 from tabulate import tabulate
 import tensorflow as tf
 from datetime import datetime
+import ast
 
 
 # https://towardsdatascience.com/natural-language-processing-with-tensorflow-e0a701ef5cef
@@ -49,4 +50,29 @@ train1['year'] = ymdcol['year1']
 train1['month'] = ymdcol['month']
 train1['day'] = ymdcol['day']
 
-# json data
+# dict data
+
+
+# genre
+def dictcol(col0, col1):
+    gen0 = []
+    for g in train1[col0]:
+        try:
+            if pd.isnull(g):
+                gen1 = []
+            else:
+                gen1 = [i[col1] for i in ast.literal_eval(g)]
+            gen0.append(gen1)
+        except ValueError:
+            print(g)
+    return gen0
+
+
+train1['genre0'] = dictcol('genres', 'name')
+train1['ngen'] = train1['genre0'].apply(lambda x: len(x))
+
+train1['company'] = dictcol('production_companies', 'name')
+train1['ncomp'] = train1['company'].apply(lambda x: len(x))
+
+train1['country'] = dictcol('production_countries', 'name')
+train1['ntry'] = train1['country'].apply(lambda x: len(x))
